@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+{{post.title}}
+<br>
+{{post.text}}
+
+{% if auth %}
+
+<a class="nav-link" aria-current="page" href='edit/'> Редактировать </a>
+
+<a class="nav-link" aria-current="page" href='delete/'> Удалить </a>
+<hr>
+Подписаться
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for item in cat %}
+
+    <input type="submit" value={{item}} name ={{item}}>
+    {% endfor %}
+</form>
+{% endif %}
+{% endblock content %}

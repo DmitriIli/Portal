@@ -1,0 +1,9 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block content %}
+<h2> {{user.username}} </h2>
+{% if not is_author %}
+    <button> <a href="upgrade/"> Сделать автором</a> </button>
+{% endif %}
+{% endblock %}

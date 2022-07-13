@@ -1,0 +1,53 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+
+
+{# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
+<form action="" method="get">
+    {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}
+    {{ filterset.form.as_p }}
+    {# Добавим кнопку отправки данных формы #}
+    <input type="submit" value="Найти"/>
+</form>
+
+{% if post_list %}
+<hr>
+<h>Статьи</h>
+{% for item in post_list %}
+<hr>
+
+<a class="nav-link" aria-current="page" href={{item.id}}> {{ item.title }}</a>
+
+{{ item.datetime_of_topic }}
+<br>
+{{ item.text|truncatewords:2  }}
+{% endfor %}
+{% else %}
+<hr>
+Ещё ничего не написано!!!
+<hr>
+{% endif %}
+<br>
+<hr>
+{% if page_obj.has_previous and page_obj.previous_page_number != 1 %}
+<a href="?page=1">{{1}}</a>
+<a href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a>
+{% elif page_obj.previous_page_number == 1 %}
+<a href="?page=1">{{1}}</a>
+{% endif%}
+
+{{page_obj.number}}
+
+{% if page_obj.has_next and page_obj.next_page_number != page_obj.paginator.num_pages %}
+<a href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a>
+<a href="?page={{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}}</a>
+{% elif page_obj.next_page_number == page_obj.paginator.num_pages %}
+<a href="?page={{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}}</a>
+{% endif%}
+
+<a class="nav-link" aria-current="page" href='create/'> Добавить пост</a>
+
+{% endblock content %}
+
+
