@@ -19,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 def my_job():
     #  Your job processing logic here...
-    print('start')
     category_list = Category.objects.all()
     week_ago = date.today() - timedelta(days=7)
     for item in category_list:

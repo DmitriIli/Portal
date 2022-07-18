@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
-
-# Create your models here.
-from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 
 
@@ -102,3 +99,6 @@ class Comment(models.Model):
     def dislike(self):
         self.rating -= 1
         self.save()
+
+
+
